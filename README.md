@@ -1,4 +1,6 @@
-![Alt text](img/lingue.png)
+<p align="center">
+  <img src="img/lingue.png" alt="Lingue Imagem"/>
+</p>
 
 # lingue
 It provides features that standardize some Windows and Linux commands. The cmd cleanup command implementation is available in the package. From systems, Linux and Windows.
