@@ -8,7 +8,7 @@ New features will be added as there is a need for implementation in other projec
 
 # Example
 
-### Run cmd cleanup without you worrying about the platform.
+### 💻 Run cmd cleanup without you worrying about the platform.
 ____
 </br>
 
