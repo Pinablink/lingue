@@ -1,18 +1,37 @@
 package lingue
 
 import (
-	"github.com/Pinablink/mTools/mutil/lingue/command"
-	"github.com/Pinablink/mTools/mutil/lingue/ilingue"
-	"github.com/Pinablink/mTools/mutil/lingue/oslabel"
+	"github.com/Pinablink/lingue/command"
+	"github.com/Pinablink/lingue/ilingue"
+	"github.com/Pinablink/lingue/oslabel"
 )
 
-// Disponibiliza recursos que uniformiza alguns comandos de Windows e Linux.
+// It provides resources that standardize some Windows and Linux commands.
 type Lingue struct {
 	mapResource map[oslabel.OSLabel]map[oslabel.OSCommand]ilingue.ICCommand
 }
 
-// NewPoliglota Disponibiliza uma instância da estrutura Lingue
+// NewLingue Provides an instance of the Lingue structure
 func NewLingue() *Lingue {
+	return &Lingue{mapResource: mkResource()}
+}
+
+// ExecCommand Execute the requested command according to the operating system provider.
+func (lingue *Lingue) ExecCommand(refCommand oslabel.OSCommand) error {
+
+	key, err := oslabel.QOS()
+
+	if err != nil {
+		return err
+	}
+
+	(lingue.mapResource[key])[refCommand].ExecuteCommand()
+
+	return nil
+}
+
+// mkResource Build the map containing the platform commands. This version contains only Linux and Windows.
+func mkResource() map[oslabel.OSLabel]map[oslabel.OSCommand]ilingue.ICCommand {
 	mapRef := make(map[oslabel.OSLabel]map[oslabel.OSCommand]ilingue.ICCommand)
 
 	var cclearLinux ilingue.ICCommand = command.NewCClearCmdl()
@@ -27,19 +46,5 @@ func NewLingue() *Lingue {
 	mapRef[oslabel.LINUX] = mapCmmLinux
 	mapRef[oslabel.WINDOWS] = mapCmmWindows
 
-	return &Lingue{mapResource: mapRef}
-}
-
-// ExecCommand Executa o comando solicitado de acordo com o Sistema Operacional provedor
-func (lingue *Lingue) ExecCommand(refCommand oslabel.OSCommand) error {
-
-	key, err := oslabel.QOS()
-
-	if err != nil {
-		return err
-	}
-
-	(lingue.mapResource[key])[refCommand].ExecuteCommand()
-
-	return nil
+	return mapRef
 }

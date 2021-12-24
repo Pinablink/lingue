@@ -5,7 +5,7 @@ import (
 	"os/exec"
 )
 
-// CClearCmd Estrutura que uniformiza o comando de limpeza do CMD nos Sistemas Operacionais, Windows e Linux
+// CClearCmd Provides Windows operating system cmd cleanup command implementation.
 type CClearCmdw struct {
 }
 
@@ -14,7 +14,7 @@ func NewCClearCmdw() *CClearCmdw {
 	return &CClearCmdw{}
 }
 
-// ExecuteCommand Implementa a forma como o windows interpreta a solicitação de comando, para limpeza do cmd
+// ExecuteCommand Implements the way windows interprets the command request, for cleaning the cmd.
 func (ref *CClearCmdw) ExecuteCommand(param ...string) {
 	refcmd := exec.Command("cmd", "/c", "cls")
 	refcmd.Stdout = os.Stdout

@@ -1,6 +1,6 @@
 package ilingue
 
-// ICCommand Disponiliza uma interface para implementação e uniformização dos comandos
+// ICCommand Provides an interface for implementation and standardization of commands
 type ICCommand interface {
 	ExecuteCommand(param ...string)
 }
